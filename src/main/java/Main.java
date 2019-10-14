@@ -3,12 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main (String[] args){
-        Config config = new Config();
-        config.initConfig("abcdefghijklmnopqrstuvwxyz", 4, 5);
-        byte[] bytes = Utils.md5Bytes("oups");
-        showConfig(config);
-        System.out.println(config.h2i(bytes, 1));
-        //Menu();
+        Menu();
         /*
          * ATTENTION SI LA TAILLE MIN ET MAX SONT TROP GROSSE N PREND EN VALEUR -4 ! à VOIR AVEC LE PROF
          */
@@ -30,6 +25,7 @@ public class Main {
             System.out.println("2  - Testez les fonctions de hashage ");
             System.out.println("3  - Question h2i ");
             System.out.println("4  - Question i2c ");
+            System.out.println("5  - Tester une nouvelle chaine");
             System.out.println("-1 - Fin du programme" + RESET);
             choix = scanner.nextLine();  // Read user input
             if (!choix.equals("0") && !choix.equals("-1") && !choix.equals("2") && !initializedConfig){ //permet d'initialiser la config si le programme choisi par le menu le neccesite
@@ -52,6 +48,9 @@ public class Main {
                     break;
                 case "4":
                     testI2c(config);
+                    break;
+                case "5":
+                    testNouvelleChaine(config);
                     break;
                 case "-1":
                     exit = true;
@@ -137,6 +136,12 @@ public class Main {
                     break;
             }
         }while(!exit);
+    }
+
+    public static void testNouvelleChaine(Config config){
+        int indiceDepart = loopUntilGoodInt("Veuillez choisir un indice de départ", 0);
+        int largeur = loopUntilGoodInt("Veuillez choisir une largeur", 1);
+        System.out.println(GREEN + "Votre indice final pour " + indiceDepart + " avec une largeur de " + largeur + " est : " + config.nouvelleChaine(indiceDepart, largeur) + RESET);
     }
 
     private static void testI2c(Config config) {

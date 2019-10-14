@@ -2,6 +2,7 @@ import javax.rmi.CORBA.Util;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class Config {
     private String alphabet;
@@ -95,6 +96,18 @@ public class Config {
         }
 
         String res = new String(str);
+        return res;
+    }
+
+    public int i2iMd5(int number, int indice){
+        return (int)h2i(Utils.md5Bytes(i2c(number)), indice);
+    }
+
+    public int nouvelleChaine(int indiceDepart, int largeur){
+        int res = indiceDepart;
+        for (int i = 1; i < largeur; i++){
+            res = i2iMd5(res, i);
+        }
         return res;
     }
 

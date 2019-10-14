@@ -6,6 +6,11 @@ public class Main {
         Menu();
         /*
          * ATTENTION SI LA TAILLE MIN ET MAX SONT TROP GROSSE N PREND EN VALEUR -4 ! à VOIR AVEC LE PROF
+         *
+         * ############## QUESTION 6 ####################
+         * Avec l'ajout de la profondeur, nous pouvons obtenir deux hash different pour une même suite d'octet.
+         * de cette manière, si par malchance, nous obtenons la même suite d'octet au fur et à mesure que la profondeur augmente,
+         * nous ne pouvons jamais rentrer dans un cycle. (qui sans l'ajout de la profondeur ce repetterai et nous donnerai plus de hash différent)
          */
     }
 

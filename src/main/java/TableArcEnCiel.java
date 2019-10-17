@@ -1,3 +1,5 @@
+import javafx.scene.shape.Path;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -6,7 +8,7 @@ public class TableArcEnCiel {
     private static List<Integer> indexDejaPresent;
     private static Map<Integer, Integer> table;
     private int profondeur;
-    private static Config config;
+    private Config config;
 
     public TableArcEnCiel(Config config) {
         indexDejaPresent = new ArrayList<>();
@@ -26,7 +28,7 @@ public class TableArcEnCiel {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
-    public static int newAleaIndex(int max){
+    public int newAleaIndex(int max){
         Random rand = new Random();
         int indAlea = rand.nextInt(max + 1);
         while(indexDejaPresent.contains(indAlea)){
@@ -35,7 +37,7 @@ public class TableArcEnCiel {
         return indAlea;
     }
 
-    static void creerTable(int largeur, int hauteur){
+    public void creerTable(int largeur, int hauteur){
         int ind = newAleaIndex(Config.getN());
         table = new HashMap<>();
         for (int i = 0; i < hauteur; i++){
@@ -48,22 +50,22 @@ public class TableArcEnCiel {
         }
         System.out.println("Table creer");
 
-        sauve_table(table,"SaveTable.txt");
-        System.out.println("Table sauvegarder");
+        sauve_table(table,"saveTable.txt", "tables");
     }
 
-    public static void sauve_table(Map TableArcEnCiel, String NomFichier) {
-        String path = NomFichier;
-        File fichier = new File(path);
+    public void sauve_table(Map tableArcEnCiel, String nomFichier, String directory) {
+        new File(directory).mkdirs(); // création des dossiers en pour le fichier du path
+        File fichier = new File(directory +"\\"+ nomFichier);
         String newLine = System.getProperty("line.separator");
 
         try{
-
             if (!fichier.exists()) {
-                fichier.createNewFile();
+                System.out.println("nom fichier ? " + nomFichier);
+                boolean succes = fichier.createNewFile();
+                System.out.println("succes ? " + succes);
             }
 
-            FileWriter fw = new FileWriter(path);
+            FileWriter fw = new FileWriter(fichier);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(Config.getAlphabet() + newLine);
             bw.write(Config.getTailleMin() + newLine);
@@ -72,7 +74,7 @@ public class TableArcEnCiel {
             bw.write(Config.gethauteur() + newLine);
             bw.write("indice indiceHash" + newLine);
 
-            Iterator iterator = TableArcEnCiel.entrySet().iterator();
+            Iterator iterator = tableArcEnCiel.entrySet().iterator();
             while (iterator.hasNext()) {
 
                 Map.Entry mapentry = (Map.Entry) iterator.next();
@@ -83,17 +85,18 @@ public class TableArcEnCiel {
             bw.close();
 
         }catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Impossible de creer le fichier");
         }
     }
 
-    public static void ouvre_table(String NomFichier) throws IOException {
+    public void ouvre_table(String pathFichier) throws IOException {
 
         String alphabet;
         int taille_min, taille_max, largeur, hauteur;
         table = new HashMap<>();
 
-        InputStream flux= new FileInputStream(NomFichier);
+        InputStream flux= new FileInputStream(pathFichier);
         InputStreamReader lecture=new InputStreamReader(flux);
         BufferedReader buff = new BufferedReader(lecture);
 
@@ -115,7 +118,7 @@ public class TableArcEnCiel {
             table.put(Integer.parseInt(contenu[0]),Integer.parseInt(contenu[1]));
         }
 
-        sauve_table(table, "OuvrirTable.txt");
+        sauve_table(table, "ouvrirTable.txt", "tables");
         System.out.println("Table ouverte");
     }
 }

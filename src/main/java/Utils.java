@@ -3,9 +3,8 @@ import com.google.common.hash.Hashing;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Utils {
@@ -61,5 +60,13 @@ public class Utils {
             res[i] = bytes[i] & 0xFF ;
         }
         return res;
+    }
+
+    public static Map<Integer, Integer> mapSortByValue(Map<Integer, Integer> map){// a test
+        /*
+        trie le dictionnaire en fonction de ses valeurs
+         */
+        return map.entrySet().stream().sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 }

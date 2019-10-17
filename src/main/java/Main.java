@@ -1,9 +1,16 @@
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main (String[] args){
-        Menu();
+    public static void main (String[] args) throws IOException {
+
+        Config config = new Config();
+        config.initConfig("abcdefghijklmnopqrstuvwxyz", 5, 5, 200, 100);
+        new TableArcEnCiel(config);
+        TableArcEnCiel.creerTable(200,100);
+        TableArcEnCiel.ouvre_table("SaveTable.txt");
+        //Menu();
         /*
          * ATTENTION SI LA TAILLE MIN ET MAX SONT TROP GROSSE N PREND EN VALEUR -4 ! à VOIR AVEC LE PROF
          *

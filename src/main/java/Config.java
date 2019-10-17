@@ -1,4 +1,4 @@
-import javax.rmi.CORBA.Util;
+//import javax.rmi.CORBA.Util;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,26 +6,34 @@ import java.util.List;
 import java.util.Map;
 
 public class Config {
-    private String alphabet;
-    private int tailleMin, tailleMax, N, tailleAlphabet;
+    private static String alphabet;
+    private static int tailleMin, tailleMax, N, tailleAlphabet, largeur, hauteur;
     private int[] T;
 
     public Config() {
     }
 
-    public String getAlphabet() {
+    public static String getAlphabet() {
         return alphabet;
     }
 
-    public int getTailleMin() {
+    public static int getTailleMin() {
         return tailleMin;
     }
 
-    public int getTailleMax() {
+    public static int getTailleMax() {
         return tailleMax;
     }
 
-    public int getN() {
+    public static int getlargeur() {
+        return largeur;
+    }
+
+    public static int gethauteur() {
+        return hauteur;
+    }
+
+    public static int getN() {
         return N;
     }
 
@@ -64,6 +72,12 @@ public class Config {
         tailleAlphabet = alphabet.length();
         initT();
         initN();
+    }
+
+    public void initConfig(String alphabet, int tailleMin, int tailleMax, int largeur, int hauteur){
+        initConfig(alphabet, tailleMin, tailleMax);
+        this.largeur = largeur;
+        this.hauteur = hauteur;
     }
 
     private void initT() {

@@ -1,9 +1,5 @@
-//import javax.rmi.CORBA.Util;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.security.NoSuchAlgorithmException;
 
 public class Config {
     private  String alphabet;
@@ -96,11 +92,11 @@ public class Config {
         return res;
     }
 
-    public int i2iMd5(int number, int indice){
+    public int i2iMd5(int number, int indice) throws NoSuchAlgorithmException {
         return (int)h2i(Utils.md5Bytes(i2c(number)), indice);
     }
 
-    public int nouvelleChaine(int indiceDepart, int largeur, boolean isMD5){
+    public int nouvelleChaine(int indiceDepart, int largeur, boolean isMD5) throws NoSuchAlgorithmException {
         int res = indiceDepart;
         for (int i = 1; i < largeur; i++){
             res = isMD5 ? i2iMd5(res, i) : i2iSha1(res, i);
@@ -108,7 +104,7 @@ public class Config {
         return res;
     }
 
-    public int i2iSha1(int number, int indice) {
+    public int i2iSha1(int number, int indice) throws NoSuchAlgorithmException {
         return (int)h2i(Utils.sha1Bytes(i2c(number)), indice);
     }
 }

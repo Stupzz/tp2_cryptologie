@@ -1,4 +1,5 @@
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 public class TableArcEnCiel {
@@ -41,7 +42,7 @@ public class TableArcEnCiel {
         return indAlea;
     }
 
-    public void creerTable(int largeur, int hauteur) {
+    public void creerTable(int largeur, int hauteur) throws NoSuchAlgorithmException {
         this.largeur = largeur;
         this.hauteur = hauteur;
 
@@ -154,7 +155,7 @@ public class TableArcEnCiel {
 //   - largeur : longueur des chaines
 //   - h : empreinte à inverser
 //   - clair : (résultat) texte clair dont l'empreinte est h
-    public String inverse(byte[] h) {
+    public String inverse(byte[] h) throws NoSuchAlgorithmException {
         int nb_candidats = 0;
         long idx;
         for (int t = largeur - 1; t > 0; t--) {
@@ -178,7 +179,7 @@ public class TableArcEnCiel {
         return null;
     }
 
-    public String verifie_candidat(byte[] h, int t, int idx) {
+    public String verifie_candidat(byte[] h, int t, int idx) throws NoSuchAlgorithmException {
         int tmp = idx;
         for (int i = 1; i < t; i++) {
             tmp = isMD5hash ? config.i2iMd5(tmp, i) : config.i2iSha1(tmp, i);

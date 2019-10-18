@@ -1,17 +1,16 @@
-import com.sun.prism.impl.shape.ShapeUtil;
-
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
         Menu();
     }
 
 
-    private static void Menu() throws IOException {
+    private static void Menu() throws IOException, NoSuchAlgorithmException {
         boolean initializedConfig = false;
         Config config = new Config();
         TableArcEnCiel tableArcEnCiel = null;
@@ -108,7 +107,7 @@ public class Main {
         } while (!exit);
     }
 
-    private static void craquer(TableArcEnCiel tableArcEnCiel){
+    private static void craquer(TableArcEnCiel tableArcEnCiel) throws NoSuchAlgorithmException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez choisir le mot à hasher. Veuillez respecter la taille du mot avec tailleMin " + tableArcEnCiel.getConfig().getTailleMin() + " et de taille max " + tableArcEnCiel.getConfig().getTailleMax());
         String choix = sc.nextLine();
@@ -145,7 +144,7 @@ public class Main {
         return new TableArcEnCiel().ouvreTable(path);
     }
 
-    private static TableArcEnCiel creationFichierSauvegarde(Config config) {
+    private static TableArcEnCiel creationFichierSauvegarde(Config config) throws NoSuchAlgorithmException {
         TableArcEnCiel tableArcEnCiel = new TableArcEnCiel(config, choixHashage());
         int largeur = loopUntilGoodInt("Veulliez choisir votre largeur", 1);
         int hauteur = loopUntilGoodInt("Veulliez choisir votre hauteur", 1);
@@ -221,7 +220,7 @@ public class Main {
         System.out.println(RED + "ERROR : Veuillez saisir un champ valide du menu");
     }
 
-    private static void testFonctionHash() {
+    private static void testFonctionHash() throws NoSuchAlgorithmException {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         String choix, str;
         boolean exit = false;
@@ -254,7 +253,7 @@ public class Main {
         } while (!exit);
     }
 
-    public static void testNouvelleChaine(Config config) {
+    public static void testNouvelleChaine(Config config) throws NoSuchAlgorithmException {
         int indiceDepart = loopUntilGoodInt("Veuillez choisir un indice de départ", 0);
         int largeur = loopUntilGoodInt("Veuillez choisir une largeur", 1);
         boolean choixHashage = choixHashage();
@@ -267,7 +266,7 @@ public class Main {
         System.out.println(GREEN + "i2c : " + number + " -> " + config.i2c(number) + RESET);
     }
 
-    private static void testH2i(Config config) {
+    private static void testH2i(Config config) throws NoSuchAlgorithmException {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         String choix, str;
         System.out.println(BLUE + "Saisissez votre string pour le hashage :" + RESET);

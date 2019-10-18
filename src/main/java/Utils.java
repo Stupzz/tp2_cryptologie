@@ -1,21 +1,27 @@
-import com.google.common.hash.Hashing;
-
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class Utils {
 
-    public static String md5Hexa(String str){
-        byte[] bytes = Hashing.md5().hashString(str, StandardCharsets.UTF_8).asBytes();
+    public static String md5Hexa(String str) throws NoSuchAlgorithmException {
+        byte[] byteStr = str.getBytes(StandardCharsets.UTF_8);
+        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+        byte[] bytes = messageDigest.digest(byteStr);
+
         return getHexaStrFromByteArray(bytes);
     }
 
-    public static String sha1Hexa(String str){
-        byte[] bytes = Hashing.sha1().hashString(str, StandardCharsets.UTF_8).asBytes();
+    public static String sha1Hexa(String str) throws NoSuchAlgorithmException {
+        byte[] byteStr = str.getBytes(StandardCharsets.UTF_8);
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+        byte[] bytes = messageDigest.digest(byteStr);
+
         return getHexaStrFromByteArray(bytes);
     }
 
@@ -29,12 +35,18 @@ public class Utils {
         return hexString.toString();
     }
 
-    public static byte[] md5Bytes(String str){
-        return Hashing.md5().hashString(str, StandardCharsets.UTF_8).asBytes();
+    public static byte[] md5Bytes(String str) throws NoSuchAlgorithmException {
+        byte[] byteStr = str.getBytes(StandardCharsets.UTF_8);
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+        byte[] bytes = messageDigest.digest(byteStr);
+        return bytes;
     }
 
-    public static byte[] sha1Bytes(String str){
-        return Hashing.sha1().hashString(str, StandardCharsets.UTF_8).asBytes();
+    public static byte[] sha1Bytes(String str) throws NoSuchAlgorithmException {
+        byte[] byteStr = str.getBytes(StandardCharsets.UTF_8);
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+        byte[] bytes = messageDigest.digest(byteStr);
+        return bytes;
     }
 
     public static byte[] getXFirstByte(byte[] bytes, int x){

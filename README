@@ -1,0 +1,60 @@
+ARRIGO Jordan
+CARBONNIER Mathieu
+
+TP2-Info910-Crypto : Compromis temps/mémoire, les tables arc-en-ciel
+
+=================================================================================================================================================================================================
+
+Installation et éxécution du programme :
+
+Notre tp a été fait en Java avec Gradle.
+
+Pour éxécuter notre tp il faut :
+
+	1 - Dézipper l'archive;
+	2 - Aller dans le dossier et ouvrir un terminal à cette endroit;
+	3 - Ecrire : "gradle build" ;
+	4 - Un dossier build vient d'être créer allez, avec le terminal, dedans puis allez dans classes puis dans main, des fichiers .class ci-trouve;
+	5 - Faites "java Main" , notre menu devrait s'afficher dans votre console et depuis celui lancer la question de votre choix ;
+
+
+================================================================================================================================================================================================
+
+1 - Mise en oeuvre concrète : précalcul de la table
+
+	1.1 - Initialisation
+
+		- Question 2.1 -> Implémenter et fonctionnelle
+		- Question 2.2 -> Implémenter et fonctionnelle
+
+	1.2 - Indices et empreintes
+
+		- Question 3 -> fonction h2i "implémenter et fonctionnelle"
+
+	1.3 - Indices et textes clairs
+
+		- Question 4 -> fonction i2c "implémenter et fonctionnelle"
+
+	1.4 - Table arc-en-ciel
+
+		- Question 5 -> fonctions i2i et nouvelle_chaine "implémenter et fonctionnelle"
+
+		- Question 6 (BONUS) :
+
+			Avec l'ajout de la profondeur, nous pouvons obtenir deux hash different pour une même suite d'octet.
+            De cette manière, si par malchance, nous obtenons la même suite d'octet au fur et à mesure que la profondeur augmente,
+            nous ne pouvons jamais rentrer dans un cycle. (qui sans l'ajout de la profondeur ce repetterai et nous donnerai plus de hash différent).
+
+        - Question 7 -> fonctions index_aleatoire et creer_table "implémenter et fonctionnelle"
+
+        - Question 8 -> fonctions sauve_table et ouvrir_table "implémenter et fonctionnelle"
+
+2 - Mise en oeuvre concrète : recherche dans une table arc-en-ciel
+
+		- Question 9 -> fonctions recherche_dichotomique et son inverse " implémenter et fonctionnelle"
+
+		- Question 11 -> fonction pour l'estimation de la taille de la table (en octets) et la fonction pour l'estimation de la couverture de la table "implémenter et fonctionnelle"
+
+		-Question 12 implémenter mais pas eu le temps de tester
+
+================================================================================================================================================================================================

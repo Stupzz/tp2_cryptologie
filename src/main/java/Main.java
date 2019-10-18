@@ -50,6 +50,7 @@ public class Main {
             System.out.println("5  - Tester une nouvelle chaine");
             System.out.println("6  - Création d'un fichier de sauvegarde");
             System.out.println("7  - Lecture d'un fichier de sauvegarde");
+            System.out.println("8  - Recherche dichotomique ");
             System.out.println("-1 - Fin du programme" + RESET);
             choix = scanner.nextLine();  // Read user input
             if (!choix.equals("0") && !choix.equals("-1") && !choix.equals("2") && !choix.equals("7") && !choix.equals("8") && !initializedConfig) { //permet d'initialiser la config si le programme choisi par le menu le neccesite

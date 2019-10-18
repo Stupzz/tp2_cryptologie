@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TableArcEnCiel {
     private static List<Integer> indexDejaPresent;
@@ -42,10 +41,10 @@ public class TableArcEnCiel {
 
         System.out.println("Table creer");
 
-        sauve_table(table, "saveTable.txt", "tables");
+        sauveTable(table, "saveTable.txt", "tables");
     }
 
-    public void sauve_table(Map tableArcEnCiel, String nomFichier, String directory) {
+    public void sauveTable(Map tableArcEnCiel, String nomFichier, String directory) {
         new File(directory).mkdirs(); // création des dossiers en pour le fichier du path
         File fichier = new File(directory + "\\" + nomFichier);
 
@@ -74,7 +73,7 @@ public class TableArcEnCiel {
         }
     }
 
-    public void ouvre_table(String pathFichier) throws IOException {
+    public void ouvreTable(String pathFichier) throws IOException {
         table = new HashMap<>();
 
         InputStream flux = new FileInputStream(pathFichier);
@@ -94,7 +93,7 @@ public class TableArcEnCiel {
         }
 
         table = Utils.mapSortByValue(table); // car le Map.put met dans l'orde des clés
-        sauve_table(table, "ouvrirTable.txt", "tables");
+        sauveTable(table, "ouvrirTable.txt", "tables");
         System.out.println("Table ouverte");
     }
 

@@ -9,7 +9,7 @@ public class Main {
         config.initConfig("abcdefghijklmnopqrstuvwxyz", 5, 5, 200, 100);
         TableArcEnCiel tableArcEnCiel = new TableArcEnCiel(config);
         tableArcEnCiel.creerTable(200,100);
-        tableArcEnCiel.ouvre_table("tables\\saveTable.txt");
+        tableArcEnCiel.ouvreTable("tables\\saveTable.txt");
         //Menu();
         /*
          * ATTENTION SI LA TAILLE MIN ET MAX SONT TROP GROSSE N PREND EN VALEUR -4 ! à VOIR AVEC LE PROF

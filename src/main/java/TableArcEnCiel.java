@@ -28,6 +28,9 @@ public class TableArcEnCiel {
         return indexDejaPresent;
     }
 
+    public boolean isMD5hash() {
+        return isMD5hash;
+    }
 
     public int newAleaIndex(int max) {
         Random rand = new Random();
@@ -43,10 +46,10 @@ public class TableArcEnCiel {
         this.hauteur = hauteur;
 
         List<TableArcEnCielElement> tableElements = new ArrayList<>();
-        int ind = newAleaIndex(Config.getN());
+        int ind = newAleaIndex(config.getN());
         for (int i = 0; i < hauteur; i++) {
             while (indexDejaPresent.contains(ind)) {
-                ind = newAleaIndex(Config.getN());
+                ind = newAleaIndex(config.getN());
             }
             int indFinal = config.nouvelleChaine(ind, largeur, isMD5hash);
             indexDejaPresent.add(ind);
@@ -171,7 +174,7 @@ public class TableArcEnCiel {
                 }
             }
         }
-        System.out.println("- Nb candidats: " + nb_candidats);
+        System.out.println("Vous n'avez pas trouver le bon mais vous avez potentiellement : " + nb_candidats);
         return null;
     }
 
@@ -192,13 +195,11 @@ public class TableArcEnCiel {
 
         File fichier = new File("SaveTable.txt");
         long taille = fichier.length();
-
-        System.out.println("La taille de la table en octect est de : " + taille + " octets");
         return taille;
     }
 
-    public int getCouverture(int n, int largeur, int hauteur){
-
+    public int getCouverture(){
+        int n = config.getN();
         int m = hauteur;
         double v = 1.0;
         for (int i = 0; i < largeur; i++){
@@ -219,11 +220,11 @@ public class TableArcEnCiel {
         String newLine = System.getProperty("line.separator");
         try {
             bw.write("méthode de hashage : " + (isMD5hash ? "md5" : "sha1") + newLine);
-            bw.write("alphabet : " + Config.getAlphabet() + newLine);
-            bw.write("taille de l'alphabet : " + Config.getAlphabet().length() + newLine);
-            bw.write("taille min : " + Config.getTailleMin() + newLine);
-            bw.write("taille max : " + Config.getTailleMax() + newLine);
-            bw.write("nombre texte claire : " + Config.getN() + newLine);
+            bw.write("alphabet : " + config.getAlphabet() + newLine);
+            bw.write("taille de l'alphabet : " + config.getAlphabet().length() + newLine);
+            bw.write("taille min : " + config.getTailleMin() + newLine);
+            bw.write("taille max : " + config.getTailleMax() + newLine);
+            bw.write("nombre texte claire : " + config.getN() + newLine);
             bw.write("largeur : " + largeur + newLine);
             bw.write("hauteur : " + hauteur + newLine);
             bw.write("indice indiceProfondeur" + newLine);

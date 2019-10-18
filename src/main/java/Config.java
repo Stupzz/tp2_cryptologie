@@ -6,26 +6,26 @@ import java.util.List;
 import java.util.Map;
 
 public class Config {
-    private static String alphabet;
-    private static int tailleMin, tailleMax, N, tailleAlphabet;
+    private  String alphabet;
+    private  int tailleMin, tailleMax, N, tailleAlphabet;
     private int[] T;
 
     public Config() {
     }
 
-    public static String getAlphabet() {
+    public  String getAlphabet() {
         return alphabet;
     }
 
-    public static int getTailleMin() {
+    public  int getTailleMin() {
         return tailleMin;
     }
 
-    public static int getTailleMax() {
+    public  int getTailleMax() {
         return tailleMax;
     }
 
-    public static int getN() {
+    public  int getN() {
         return N;
     }
 

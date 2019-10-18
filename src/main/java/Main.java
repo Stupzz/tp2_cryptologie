@@ -7,27 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
-//        Config config = new Config();
-//        config.initConfig("abcdefghijklmnopqrstuvwxyz", 5, 5);
-//        TableArcEnCiel tableArcEnCiel = new TableArcEnCiel(config);
-//        tableArcEnCiel.creerTable(200, 100);
-//        tableArcEnCiel.ouvreTable("tables\\savedTable.txt");
-//        int numberToFind = loopUntilGoodInt("recherche dicho number ?", 0);
-//        int[] indexEgaux = tableArcEnCiel.rechercheDichotomique((long) numberToFind);
-//        for (int ind : indexEgaux) {
-//            System.out.println(ind);
-//        }
-
         Menu();
-        /*
-         * ATTENTION SI LA TAILLE MIN ET MAX SONT TROP GROSSE N PREND EN VALEUR -4 ! à VOIR AVEC LE PROF
-         *
-         * ############## QUESTION 6 ####################
-         * Avec l'ajout de la profondeur, nous pouvons obtenir deux hash different pour une même suite d'octet.
-         * de cette manière, si par malchance, nous obtenons la même suite d'octet au fur et à mesure que la profondeur augmente,
-         * nous ne pouvons jamais rentrer dans un cycle. (qui sans l'ajout de la profondeur ce repetterai et nous donnerai plus de hash différent)
-         */
     }
 
 
@@ -51,6 +31,9 @@ public class Main {
             System.out.println("6  - Création d'un fichier de sauvegarde");
             System.out.println("7  - Lecture d'un fichier de sauvegarde");
             System.out.println("8  - Recherche dichotomique ");
+            System.out.println("9  - Taille de la table en octets ");
+            System.out.println("10  - Couverture de la table ");
+            System.out.println("11  - Craquer ");
             System.out.println("-1 - Fin du programme" + RESET);
             choix = scanner.nextLine();  // Read user input
             if (!choix.equals("0") && !choix.equals("-1") && !choix.equals("2") && !choix.equals("7") && !choix.equals("8") && !initializedConfig) { //permet d'initialiser la config si le programme choisi par le menu le neccesite
@@ -91,6 +74,30 @@ public class Main {
                         testRechercheDicho(tableArcEnCiel);
                     }
                     break;
+                case "9":
+                    if(tableArcEnCiel != null){
+                        System.out.println(GREEN + "la taille en octet de notre table est de " + tableArcEnCiel.getTailleOctect() + RESET);tableArcEnCiel.getTailleOctect();
+                    }
+                    else {
+                        System.out.println(RED + "Veuillez initialiser la table arc en Ciel " + RESET);
+                    }
+                    break;
+                case "10":
+                    if(tableArcEnCiel != null){
+                        System.out.println(GREEN + "la couverture  de notre table est " + tableArcEnCiel.getCouverture() + RESET);tableArcEnCiel.getTailleOctect();
+                    }
+                    else {
+                        System.out.println(RED + "Veuillez initialiser la table arc en Ciel " + RESET);
+                    }
+                    break;
+                case "11":
+                    if(tableArcEnCiel != null){
+                      craquer(tableArcEnCiel);
+                    }
+                    else {
+                        System.out.println(RED + "Veuillez initialiser la table arc en Ciel " + RESET);
+                    }
+                    break;
                 case "-1":
                     exit = true;
                     break;
@@ -99,6 +106,19 @@ public class Main {
                     break;
             }
         } while (!exit);
+    }
+
+    private static void craquer(TableArcEnCiel tableArcEnCiel){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Veuillez choisir le mot à hasher. Veuillez respecter la taille du mot avec tailleMin " + tableArcEnCiel.getConfig().getTailleMin() + " et de taille max " + tableArcEnCiel.getConfig().getTailleMax());
+        String choix = sc.nextLine();
+        byte[] hash = tableArcEnCiel.isMD5hash()? Utils.md5Bytes(choix) : Utils.sha1Bytes(choix);
+        long debut = System.currentTimeMillis();
+        String res = tableArcEnCiel.inverse(hash);
+        if (res != null){
+            System.out.println(GREEN + " Vous avez trouver ! le mot clair est : " + res + RESET);
+        }
+        System.out.println("Temps de calcul de la fonction inverse : " + (System.currentTimeMillis() - debut) * 0.001);
     }
 
     private static void testRechercheDicho(TableArcEnCiel tableArcEnCiel){

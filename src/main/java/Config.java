@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Config {
     private static String alphabet;
-    private static int tailleMin, tailleMax, N, tailleAlphabet, largeur, hauteur;
+    private static int tailleMin, tailleMax, N, tailleAlphabet;
     private int[] T;
 
     public Config() {
@@ -25,20 +25,8 @@ public class Config {
         return tailleMax;
     }
 
-    public static int getlargeur() {
-        return largeur;
-    }
-
-    public static int gethauteur() {
-        return hauteur;
-    }
-
     public static int getN() {
         return N;
-    }
-
-    public int getTailleAlphabet() {
-        return tailleAlphabet;
     }
 
     public int[] getT() {
@@ -72,12 +60,6 @@ public class Config {
         tailleAlphabet = alphabet.length();
         initT();
         initN();
-    }
-
-    public void initConfig(String alphabet, int tailleMin, int tailleMax, int largeur, int hauteur){
-        initConfig(alphabet, tailleMin, tailleMax);
-        this.largeur = largeur;
-        this.hauteur = hauteur;
     }
 
     private void initT() {
@@ -118,11 +100,15 @@ public class Config {
         return (int)h2i(Utils.md5Bytes(i2c(number)), indice);
     }
 
-    public int nouvelleChaine(int indiceDepart, int largeur){
+    public int nouvelleChaine(int indiceDepart, int largeur, boolean isMD5){
         int res = indiceDepart;
         for (int i = 1; i < largeur; i++){
-            res = i2iMd5(res, i);
+            res = isMD5 ? i2iMd5(res, i) : i2iSha1(res, i);
         }
         return res;
+    }
+
+    public int i2iSha1(int number, int indice) {
+        return (int)h2i(Utils.sha1Bytes(i2c(number)), indice);
     }
 }
